@@ -19,7 +19,8 @@ Gem::Specification.new do |s|
     "README.markdown"
   ]
   s.files = [
-    ".rvmrc",
+    ".ruby-version",
+    ".ruby-gemset",
     ".travis.yml",
     ".yardopts",
     "CHANGELOG.markdown",
