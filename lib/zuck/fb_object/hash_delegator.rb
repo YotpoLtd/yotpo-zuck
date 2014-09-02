@@ -15,7 +15,7 @@ module Zuck
   #
   #       include Zuck::HashDelegator
   #
-  #       known_keys :foo, :bar
+  #       fields :foo, :bar
   #
   #       def initialize(initial_data)
   #         set_data(initial_data)
@@ -47,11 +47,13 @@ module Zuck
     end
 
     module ClassMethods
-      def known_keys(*args)
-        args.each do |key|
+      def fields(*args)
+        return @fields if (args.nil? || args.empty?)
 
+        @fields = args
+        args.each do |key|
           # Define list of known keys
-          self.send(:define_method, :known_keys) do
+          self.send(:define_method, :fields) do
             args || []
           end
 

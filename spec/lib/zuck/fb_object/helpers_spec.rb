@@ -3,7 +3,7 @@ require 'spec_helper'
 class HTest
   extend  Zuck::FbObject::Helpers
   include Zuck::FbObject::Helpers
-  def self.known_keys; []; end
+  def self.fields; []; end
 end
 
 describe Zuck::FbObject::Helpers do

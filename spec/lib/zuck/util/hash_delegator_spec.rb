@@ -2,7 +2,7 @@ require 'spec_helper'
 
 class HDTest
   include Zuck::HashDelegator
-  known_keys :bar
+  fields :bar
 end
 
 describe Zuck::HashDelegator do
