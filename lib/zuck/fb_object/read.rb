@@ -7,7 +7,7 @@ module Zuck
 
     # @param graph [Koala::Facebook::API] A graph with access_token
     # @param data [Hash] The properties you want to assign, this is what
-    #   facebook gave us (see known_keys).
+    #   facebook gave us (see fields).
     # @param parent [<FbObject] A parent context for this class, must
     #   inherit from {Zuck::FbObject}
     def initialize(graph, data = {}, parent=nil)

@@ -1,9 +1,7 @@
 module Zuck
   class AdCampaign < RawFbObject
+    # https://developers.facebook.com/docs/reference/ads-api/adset
 
-    # The [fb docs](https://developers.facebook.com/docs/reference/ads-api/adaccount/)
-    # were incomplete, so I added here what the graph explorer
-    # actually returned.
     fields :id,
            :name,
            :account_id,
@@ -15,6 +13,8 @@ module Zuck
            :start_time,
            :end_time,
            :updated_time
+
+    update_fields :name
 
     parent_object :ad_account
     list_path     :adcampaigns

@@ -1,9 +1,7 @@
 module Zuck
   class AdAccount < RawFbObject
+    # https://developers.facebook.com/docs/reference/ads-api/adaccount
 
-    # The [fb docs](https://developers.facebook.com/docs/reference/ads-api/adaccount/)
-    # were incomplete, so I added here what the graph explorer
-    # actually returned.
     fields :id,
            :account_id,
            :account_status,
@@ -32,16 +30,17 @@ module Zuck
            :users,
            :vat_status
 
+    update_fields :name
 
     list_path   'me/adaccounts'
-    connections :ad_campaigns, :ad_campaign_groups
+    connections :ad_campaign_groups, :ad_campaigns, :ad_creatives
 
     def self.all(graph = Zuck.graph)
       super(graph)
     end
 
     def self.create(data, graph = Zuck.graph)
-      super(graph, data, nil, '')
+      super(graph, data)
     end
   end
 end

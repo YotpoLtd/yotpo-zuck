@@ -38,7 +38,7 @@ module Zuck
   #     => :you_also_have_setters
   #
   # As you can see, all string keys become symbols and the
-  # foo and bar methods were added because they are known keys
+  # foo and bar methods were added because they are fields
   #
   module HashDelegator
 
@@ -52,7 +52,7 @@ module Zuck
 
         @fields = args
         args.each do |key|
-          # Define list of known keys
+          # Define list of fields
           self.send(:define_method, :fields) do
             args || []
           end
@@ -69,6 +69,11 @@ module Zuck
             @hash_delegator_hash[key] = val
           end
         end
+      end
+
+      def update_fields(*args)
+        return @update_fields if (args.nil? || args.empty?)
+        @update_fields = args
       end
     end
 

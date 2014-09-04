@@ -2,26 +2,37 @@ require 'zuck/facebook/ad_creative'
 
 module Zuck
   class AdGroup < RawFbObject
+    # https://developers.facebook.com/docs/reference/ads-api/adgroup
 
-    # The [fb docs](https://developers.facebook.com/docs/reference/ads-api/adaccount/)
-    # were incomplete, so I added here what the graph explorer
-    # actually returned.
-    fields :account_id,
-           :adgroup_status,
-           :bid_info,
-           :bid_type,
-           :campaign_id,
-           :conversion_specs,
-           :created_time,
-           :creative_ids,
-           :id,
-           :disapprove_reason_descriptions,
-           :last_updated_by_app_id,
+    fields :id,
            :name,
+           :account_id,
+           :adgroup_review_feedback,
+           :adgroup_status,
+           :bid_type,
+           :bid_info,
+           :campaign_id,
+           :campaign_group_id,
+           :conversion_specs,
+           :creative_ids,
+           :failed_delivery_checks,
            :targeting,
            :tracking_specs,
+           :view_tags,
+           :created_time,
            :updated_time,
-           :view_tags
+
+    update_fields :name,
+                  :adgroup_status,
+                  :bid_type,
+                  :bid_info,
+                  :conversion_specs,
+                  :creative,
+                  :objective,
+                  :targeting,
+                  :tracking_specs,
+                  :view_tags,
+                  :view_tags
 
     parent_object :ad_campaign
     list_path     :adgroups

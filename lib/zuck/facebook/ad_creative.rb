@@ -1,31 +1,20 @@
 module Zuck
   class AdCreative < RawFbObject
+    # https://developers.facebook.com/docs/reference/ads-api/adcreative
 
-    # Can't create this directly (yet)
-    read_only
-
-    # The [fb docs](https://developers.facebook.com/docs/reference/ads-api/adaccount/)
-    # were incomplete, so I added here what the graph explorer
-    # actually returned.
-    fields :name,
-           :type,
-           :object_id,
+    fields :id,
+           :name,
+           :title,
            :body,
+           :object_url,
            :image_hash,
            :image_url,
-           :id,
-           :title,
-           :link_url,
-           :url_tags,
-           :preview_url,
-           :related_fan_page,
-           :follow_redirect,
-           :auto_update,
-           :story_id,
-           :action_spec
+           :call_to_action_type,
+           :actor_id
 
-    parent_object :ad_group
+    update_fields :name
+
+    parent_object :ad_account
     list_path     :adcreatives
-
   end
 end

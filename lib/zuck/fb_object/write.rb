@@ -8,8 +8,8 @@ module Zuck
     def save
       self.class.raise_if_read_only
 
-      # Tell facebook to return
-      data = @hash_delegator_hash.merge(redownload: 1)
+      data_fields = @hash_delegator_hash.select { |k,v| self.class.update_fields.include?(k)}
+      data = data_fields.merge(redownload: 1) # Tell facebook to return updated data
       data = data.stringify_keys
 
       # Don't post ids, because facebook doesn't like it
