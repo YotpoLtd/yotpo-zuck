@@ -4,9 +4,10 @@ module Zuck
     # The [fb docs](https://developers.facebook.com/docs/reference/ads-api/adaccount/)
     # were incomplete, so I added here what the graph explorer
     # actually returned.
-    fields :account_groups,
+    fields :id,
            :account_id,
            :account_status,
+           :account_groups,
            :age,
            :agency_client_declaration,
            :amount_spent,
@@ -21,7 +22,6 @@ module Zuck
            :capabilities,
            :currency,
            :daily_spend_limit,
-           :id,
            :is_personal,
            :name,
            :spend_cap,
@@ -38,6 +38,10 @@ module Zuck
 
     def self.all(graph = Zuck.graph)
       super(graph)
+    end
+
+    def self.create(data, graph = Zuck.graph)
+      super(graph, data, nil, '')
     end
   end
 end

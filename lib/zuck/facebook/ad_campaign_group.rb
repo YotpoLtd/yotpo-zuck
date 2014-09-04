@@ -1,8 +1,8 @@
 module Zuck
   class AdCampaignGroup < RawFbObject
     fields :id,
-           :account_id,
            :name,
+           :account_id,
            :buying_type,
            :campaign_group_status,
            :objective,
@@ -15,6 +15,6 @@ module Zuck
 
     parent_object :ad_account
     list_path     :adcampaign_groups
-    connections   :ad_groups
+    connections   :ad_groups, :ad_campaigns
   end
 end
