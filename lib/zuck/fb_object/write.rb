@@ -18,16 +18,20 @@ module Zuck
       # Update on facebook
       result = post(graph, path, data)
 
-      # The data is nested by name and id, e.g.
-      #
-      #     "campaigns" => { "12345" => "data" }
-      #
-      # Since we only put one at a time, we'll fetch this like that.
-      data = result['data'].values.first.values.first
-
-      # Update and return
-      set_data(data)
-      result['result']
+      if (result.is_a?(Hash) && result.has_key?('data'))
+        # The data is nested by name and id, e.g.
+        #
+        #     "campaigns" => { "12345" => "data" }
+        #
+        # Since we only put one at a time, we'll fetch this like that.
+        data = result['data'].values.first.values.first
+        # Update and return
+        set_data(data)
+        return result['result']
+      else
+        reload
+        return result
+      end
     end
 
     def destroy
@@ -51,7 +55,7 @@ module Zuck
 
         # Create
         result = create_connection(graph, p, list_path, data)
-        if result.has_key?('data')
+        if (result.is_a?(Hash) && result.has_key?('data'))
           # The data is nested by name and id, e.g.
           #
           #     "campaigns" => { "12345" => "data" }

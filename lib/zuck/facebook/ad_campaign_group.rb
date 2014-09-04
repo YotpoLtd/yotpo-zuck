@@ -16,6 +16,5 @@ module Zuck
     parent_object :ad_account
     list_path     :adcampaign_groups
     connections   :ad_groups
-
   end
 end

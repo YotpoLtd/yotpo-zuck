@@ -21,12 +21,13 @@ module Zuck
       end
     end
 
-    # Refetches the data from façeboko
+    # Refetches the data from facebook
     def reload
       data = get(graph, path)
       set_data(data)
       self
     end
+    alias_method :populate!, :reload
 
     private
 
