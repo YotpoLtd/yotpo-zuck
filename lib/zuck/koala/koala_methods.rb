@@ -17,6 +17,7 @@ module Zuck
     private
 
     def validate_graph(g)
+      Koala.config.api_version = "v2.1"
       e = "#{g.class} is not a Koala::Facebook::API"
       raise e unless g.is_a? ::Koala::Facebook::API
       e = "#{g} does not work without an access_token"

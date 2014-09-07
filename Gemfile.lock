@@ -52,7 +52,7 @@ GEM
     json (1.8.1-java)
     jwt (0.1.11)
       multi_json (>= 1.5)
-    koala (1.10.0)
+    koala (1.10.1)
       addressable
       faraday
       multi_json
@@ -127,7 +127,7 @@ DEPENDENCIES
   guard-rspec
   guard-yard
   jeweler (~> 2.0.1)
-  koala (~> 1.10.0)
+  koala (~> 1.10.1)
   rb-fsevent
   rdoc (~> 3.12)
   redcarpet
