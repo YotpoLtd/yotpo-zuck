@@ -33,7 +33,7 @@ module Zuck
     update_fields :name
 
     list_path   'me/adaccounts'
-    connections :ad_campaign_groups, :ad_campaigns, :ad_creatives
+    connections :ad_campaign_groups, :ad_campaigns, :ad_creatives, :ad_groups
 
     def self.all(graph = Zuck.graph)
       super(graph)

@@ -20,7 +20,7 @@ module Zuck
            :tracking_specs,
            :view_tags,
            :created_time,
-           :updated_time,
+           :updated_time
 
     update_fields :name,
                   :adgroup_status,
@@ -37,12 +37,5 @@ module Zuck
     parent_object :ad_campaign
     list_path     :adgroups
     connections   :ad_creatives
-
-    def self.create(graph, data, ad_campaign)
-      path = ad_campaign.ad_account.path
-      data['campaign_id'] = ad_campaign.id
-      super(graph, data, ad_campaign, path)
-    end
-
   end
 end
