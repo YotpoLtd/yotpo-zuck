@@ -51,9 +51,9 @@ module Zuck
         batch_api.get_object("#{id}/adgroups", fields: Zuck::AdGroup.fields.compact.join(','))
       end
       return {
-          campaign_groups: raw_campaign_groups.map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
-          campaigns: raw_campaigns.map { |c| Zuck::AdCampaign.new(graph, c) },
-          creatives: raw_creatives.map { |c| Zuck::AdCreative.new(graph, c) },
+          ad_campaign_groups: raw_campaign_groups.map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
+          ad_campaigns: raw_campaigns.map { |c| Zuck::AdCampaign.new(graph, c) },
+          ad_creatives: raw_creatives.map { |c| Zuck::AdCreative.new(graph, c) },
           ad_groups: raw_ad_groups.map { |ag| Zuck::AdGroup.new(graph, ag) }
       }
     end
