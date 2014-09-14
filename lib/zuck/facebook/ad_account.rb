@@ -44,18 +44,22 @@ module Zuck
     end
 
     def get_all(graph = Zuck.graph)
-      raw_campaign_groups, raw_campaigns, raw_creatives, raw_ad_groups = Zuck.graph.batch do |batch_api|
-        batch_api.get_object("#{id}/adcampaign_groups", fields: Zuck::AdCampaignGroup.fields.compact.join(','))
-        batch_api.get_object("#{id}/adcampaigns", fields: Zuck::AdCampaign.fields.compact.join(','))
-        batch_api.get_object("#{id}/adcreatives", fields: Zuck::AdCreative.fields.compact.join(','))
-        batch_api.get_object("#{id}/adgroups", fields: Zuck::AdGroup.fields.compact.join(','))
+      begin
+        raw_campaign_groups, raw_campaigns, raw_creatives, raw_ad_groups = Zuck.graph.batch do |batch_api|
+          batch_api.get_object("#{id}/adcampaign_groups", fields: Zuck::AdCampaignGroup.fields.compact.join(','))
+          batch_api.get_object("#{id}/adcampaigns", fields: Zuck::AdCampaign.fields.compact.join(','))
+          batch_api.get_object("#{id}/adcreatives", fields: Zuck::AdCreative.fields.compact.join(','))
+          batch_api.get_object("#{id}/adgroups", fields: Zuck::AdGroup.fields.compact.join(','))
+        end
+        return {
+            ad_campaign_groups: raw_campaign_groups.map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
+            ad_campaigns: raw_campaigns.map { |c| Zuck::AdCampaign.new(graph, c) },
+            ad_creatives: raw_creatives.map { |c| Zuck::AdCreative.new(graph, c) },
+            ad_groups: raw_ad_groups.map { |ag| Zuck::AdGroup.new(graph, ag) }
+        }
+      rescue StandardError => e
+        return e
       end
-      return {
-          ad_campaign_groups: raw_campaign_groups.map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
-          ad_campaigns: raw_campaigns.map { |c| Zuck::AdCampaign.new(graph, c) },
-          ad_creatives: raw_creatives.map { |c| Zuck::AdCreative.new(graph, c) },
-          ad_groups: raw_ad_groups.map { |ag| Zuck::AdGroup.new(graph, ag) }
-      }
     end
   end
 end
