@@ -50,12 +50,13 @@ module Zuck
         batch_api.get_object("#{id}/adcreatives", fields: Zuck::AdCreative.fields.compact.join(','))
         batch_api.get_object("#{id}/adgroups", fields: Zuck::AdGroup.fields.compact.join(','))
       end
-      return raw_data.find {|rd| rd.is_a?(StandardError)} if (raw_data.include?(StandardError))
+      error = raw_data.find {|rd| rd.is_a?(StandardError)}
+      return error unless error.nil?
       return {
-          ad_campaign_groups: raw_campaign_groups.map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
-          ad_campaigns: raw_campaigns.map { |c| Zuck::AdCampaign.new(graph, c) },
-          ad_creatives: raw_creatives.map { |c| Zuck::AdCreative.new(graph, c) },
-          ad_groups: raw_ad_groups.map { |ag| Zuck::AdGroup.new(graph, ag) }
+          ad_campaign_groups: raw_data[0].map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
+          ad_campaigns: raw_data[1].map { |c| Zuck::AdCampaign.new(graph, c) },
+          ad_creatives: raw_data[2].map { |c| Zuck::AdCreative.new(graph, c) },
+          ad_groups: raw_data[3].map { |ag| Zuck::AdGroup.new(graph, ag) }
       }
     end
   end
