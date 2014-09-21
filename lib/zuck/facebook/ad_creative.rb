@@ -10,7 +10,8 @@ module Zuck
            :image_hash,
            :image_url,
            :call_to_action_type,
-           :actor_id
+           :actor_id,
+           :object_story_spec
 
     update_fields :name
 
