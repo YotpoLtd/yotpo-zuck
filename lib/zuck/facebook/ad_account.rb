@@ -49,6 +49,7 @@ module Zuck
         batch_api.get_object("#{id}/adcampaigns", fields: Zuck::AdCampaign.fields.compact.join(','))
         batch_api.get_object("#{id}/adcreatives", fields: Zuck::AdCreative.fields.compact.join(','))
         batch_api.get_object("#{id}/adgroups", fields: Zuck::AdGroup.fields.compact.join(','))
+        batch_api.get_object("#{id}/customaudiences", fields: Zuck::AdCustomAudience.fields.compact.join(','))
       end
       error = raw_data.find {|rd| rd.is_a?(StandardError)}
       return error unless error.nil?
@@ -56,7 +57,8 @@ module Zuck
           ad_campaign_groups: raw_data[0].map { |cg| Zuck::AdCampaignGroup.new(graph, cg) },
           ad_campaigns: raw_data[1].map { |c| Zuck::AdCampaign.new(graph, c) },
           ad_creatives: raw_data[2].map { |c| Zuck::AdCreative.new(graph, c) },
-          ad_groups: raw_data[3].map { |ag| Zuck::AdGroup.new(graph, ag) }
+          ad_groups: raw_data[3].map { |ag| Zuck::AdGroup.new(graph, ag) },
+          ad_custom_audiences: raw_data[4].map { |ca| Zuck::AdCustomAudience.new(graph, ca) }
       }
     end
 
