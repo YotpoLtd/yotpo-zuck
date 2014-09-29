@@ -4,7 +4,8 @@ module Zuck
 
     fields :id,
            :name,
-           :subtype
+           :subtype,
+           :lookalike_spec
 
 
     parent_object :ad_account
