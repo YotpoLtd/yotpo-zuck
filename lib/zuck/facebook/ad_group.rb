@@ -39,9 +39,9 @@ module Zuck
     list_path     :adgroups
     connections   :ad_creatives
 
-    def get_ad_statistics(graph = Zuck.graph)
+    def get_ad_statistics(start_time, graph = Zuck.graph)
       adgroup_ids = [id]
-      graph_data = graph.get_object("act_#{account_id}/adgroupstats?adgroup_ids=#{adgroup_ids.to_json}", fields: Zuck::AdStatistic.fields.compact.join(','))
+      graph_data = graph.get_object("act_#{account_id}/adgroupstats?adgroup_ids=#{adgroup_ids.to_json}&start_time=#{start_time}", fields: Zuck::AdStatistic.fields.compact.join(','))
       if (graph_data && graph_data.size > 0)
         Zuck::AdStatistic.new(graph, graph_data[0])
       else
