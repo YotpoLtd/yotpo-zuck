@@ -51,7 +51,7 @@ module Zuck
         p = path || parent.path
 
         # We want facebook to return the data of the created object
-        data['redownload'] = 1
+        data['redownload'] = 1 unless (@redownload && @redownload == false)
 
         # Create
         result = create_connection(graph, p, list_path, data)

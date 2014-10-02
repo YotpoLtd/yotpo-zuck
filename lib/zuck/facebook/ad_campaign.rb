@@ -2,6 +2,8 @@ module Zuck
   class AdCampaign < RawFbObject
     # https://developers.facebook.com/docs/reference/ads-api/adset
 
+    @redownload = false #Facebook, you're drunk go home (redownload bug).
+
     fields :id,
            :name,
            :account_id,
