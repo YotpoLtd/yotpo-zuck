@@ -8,7 +8,7 @@ module Zuck
            :objective,
            :buying_type,
            :campaign_group_status,
-           :spend_cap,
+           # :spend_cap, Facebook, you're drunk go home (Error after October 1st migrations).
            :topline_id,
            :created_time,
            :start_time,
