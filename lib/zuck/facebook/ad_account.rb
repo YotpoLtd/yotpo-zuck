@@ -69,7 +69,7 @@ module Zuck
     def get_ad_statistics(ad_group_ids, start_time, graph = Zuck.graph)
       graph_data = graph.get_object("#{id}/stats?ids=#{ad_group_ids}&start_time=#{start_time}", fields: Zuck::AdStatistic.fields.compact.join(','))
       if (graph_data && graph_data.size > 0)
-        graph_data.map { |as| Zuck::AdStatistic.new(graph, graph_data[0]) }
+        Hash[graph_data.map { |id, ad_group_stats| [ id, Zuck::AdStatistic.new(graph, ad_group_stats) ] }]
       else
         return nil
       end
