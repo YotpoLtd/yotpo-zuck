@@ -65,5 +65,14 @@ module Zuck
     def get_tracking_specs(graph = Zuck.graph)
       return graph.get_object("#{id}/offsitepixels")
     end
+
+    def get_ad_statistics(ad_group_ids, start_time, graph = Zuck.graph)
+      graph_data = graph.get_object("#{id}/stats?ids=#{ad_group_ids}&start_time=#{start_time}", fields: Zuck::AdStatistic.fields.compact.join(','))
+      if (graph_data && graph_data.size > 0)
+        graph_data.map { |as| Zuck::AdStatistic.new(graph, graph_data[0]) }
+      else
+        return nil
+      end
+    end
   end
 end
