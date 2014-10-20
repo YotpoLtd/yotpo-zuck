@@ -16,7 +16,8 @@ module Zuck
            :end_time,
            :updated_time
 
-    update_fields :name
+    update_fields :name,
+                  :campaign_status
 
     parent_object :ad_account
     list_path     :adcampaigns
