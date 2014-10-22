@@ -19,7 +19,6 @@ module Zuck
            :failed_delivery_checks,
            :targeting,
            :tracking_specs,
-           :view_tags,
            :created_time,
            :updated_time
 
@@ -31,9 +30,7 @@ module Zuck
                   :creative,
                   :objective,
                   :targeting,
-                  :tracking_specs,
-                  :view_tags,
-                  :view_tags
+                  :tracking_specs
 
     parent_object :ad_campaign
     list_path     :adgroups
