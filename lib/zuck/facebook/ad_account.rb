@@ -74,5 +74,25 @@ module Zuck
         return nil
       end
     end
+
+    def get_ad_reportstats(ad_group_ids, date_start, date_stop, data_columns, graph = Zuck.graph)
+      date_stop = (date_stop + 1.day)
+      default_data_columns = ['account_id', 'adgroup_id']
+      time_ranges = [{ day_start: { year: date_start.year, month: date_start.month, day: date_start.day }, day_stop: { year: date_stop.year, month: date_stop.month, day: date_stop.day } }]
+      filters = [{ field: 'action_type', type: 'in', value: ['offsite_conversion.checkout'] }]
+      filters << { field: 'adgroup_id', type: 'in', value: ad_group_ids.to_json } unless (ad_group_ids.nil? || ad_group_ids.empty?)
+      graph_data = graph.get_object("#{id}/reportstats", {
+                                                           time_ranges: time_ranges.to_json,
+                                                           data_columns: (data_columns.nil? ? default_data_columns : (default_data_columns + data_columns)).to_json,
+                                                           filters: filters.to_json,
+                                                           time_increment: (date_stop - date_start).to_i,
+                                                           summary: true
+                                                         })
+      if (graph_data && graph_data.size > 0)
+        Hash[graph_data.map { |ad_group_report_stats| [ad_group_report_stats['adgroup_id'], Zuck::AdReportStatistic.new(graph, ad_group_report_stats) ] }]
+      else
+        return nil
+      end
+    end
   end
 end
