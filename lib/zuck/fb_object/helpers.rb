@@ -6,7 +6,7 @@ module Zuck
 
       def get(graph, path)
         begin
-          graph.get_object(path, fields: fields.compact.join(','))
+          graph.get_object(path, fields: fields.compact.join(','), limit: 100)
         rescue => e
           puts "#{e} graph.get_object(#{path.to_json})" if in_irb?
           raise e
