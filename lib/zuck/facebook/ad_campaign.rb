@@ -10,7 +10,6 @@ module Zuck
            :campaign_status,
            :daily_budget,
            :lifetime_budget,
-           :daily_imps,
            :created_time,
            :start_time,
            :end_time,
